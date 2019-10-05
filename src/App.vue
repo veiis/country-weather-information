@@ -1,0 +1,156 @@
+<template>
+  <div id="app">
+    <div class="container">
+      <header>
+        <h2>SELECT A COUNTRY</h2>
+        <select name="country" id="reg_select" v-model="selectedCountry" @change="getWeatherData">
+          <option v-for="country in countriesNames" :value="country">{{ country }}</option>
+        </select>
+      </header>
+      <section>
+        <div class="boxs">
+          <div class="details" id="details">
+            <h3>Country Name: {{ currentCountry.name }}</h3>
+            <p>
+              Native Name:
+              <span>{{ currentCountry.nativeName }}</span>
+            </p>
+            <p>
+              Capital:
+              <span>{{ currentCountry.capital }}</span>
+            </p>
+            <p>
+              Region:
+              <span>{{ currentCountry.region }} {{ currentCountry.subregion }}</span>
+            </p>
+            <p>
+              Population:
+              <span>{{ currentCountry.population }}</span>
+            </p>
+            <p>
+              Languages:
+              <span
+                v-for="lang in currentCountry.languages"
+              >{{ lang.name }}, {{ lang.nativeName }}</span>
+            </p>
+            <p>
+              Timezones:
+              <span v-for="zone in currentCountry.timezones">{{ zone }}</span>
+            </p>
+          </div>
+          <div class="call-code">
+            <h2>CALLING CODE</h2>
+            <h1 v-for="callCode in currentCountry.callingCodes">{{ callCode }}</h1>
+          </div>
+          <div class="flag">
+            <img :src="currentCountry.flag" />
+          </div>
+          <div class="weather">
+            <h2>CAPITAL WEATHER REPORT</h2>
+            <img v-if="checkObject(currentWeather)" :src="'http://openweathermap.org/img/w/'+currentWeather.weather[0].icon+'.png'" />
+            <p>
+              Wind Speed:
+              <span v-if="checkObject(currentWeather)">{{ currentWeather.wind.speed }}</span>ms
+            </p>
+            <p>
+              Temprerature:
+              <span v-if="checkObject(currentWeather)">{{ currentWeather.main.temp }}</span>c
+            </p>
+            <p>
+              Humidity:
+              <span v-if="checkObject(currentWeather)">{{ currentWeather.main.humidity }}</span>%
+            </p>
+            <p>
+              Visibility:
+              <span v-if="checkObject(currentWeather)">{{ currentWeather.visibility }}</span>m
+            </p>
+          </div>
+          <div id="map" v-if="checkObject(currentWeather)">
+            <l-map style="height: 100%;" :zoom="map.zoom" :center="map.center">
+              <l-tile-layer :url="map.url" :attribution="map.attribution"></l-tile-layer>
+            </l-map>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</template>
+
+<script>
+import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import L from "leaflet";
+
+export default {
+  name: "app",
+  components: {
+    LMap,
+    LTileLayer,
+    LMarker
+  },
+  data: function() {
+    return {
+      countries: [],
+      countriesNames: [],
+      selectedCountry: "",
+      currentCountry: {},
+      currentWeather: {},
+      map: {
+        zoom: 10,
+        center: L.latLng(0, 0),
+        url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+        attribution:
+          '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      }
+    };
+  },
+
+  methods: {
+    // Get index of an option that we select
+    getIndexOfOption(countryName) {
+      return this.countriesNames.indexOf(countryName);
+    },
+
+    checkObject(obj) {
+      if (Object.keys(obj).length !== 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    // Get Weather of the country that we select. to determine wich country wee need to get weather data we using index. because we use the
+    // capital of country and to access that we need to access the index of the country in countries Array
+    getWeatherData() {
+      this.currentCountry = this.countries[
+        this.getIndexOfOption(this.selectedCountry)
+      ];
+      this.$http
+        .get(
+          "https://api.openweathermap.org/data/2.5/weather?q=" +
+            this.currentCountry.capital +
+            "&units=metric&appid=b11102c85a634f934866cc65493df3d4"
+        )
+        .then(data => {
+          this.currentWeather = data.body;
+          this.map.center = L.latLng(data.body.coord.lat, data.body.coord.lon);
+        });
+
+        
+    }
+  },
+
+  // We need to load countries on load of the application so we to use created() to do that. it's run on the load
+  created() {
+    this.$http.get("https://restcountries.eu/rest/v2/").then(data => {
+      for (let i = 0; i < data.body.length; i++) {
+        this.countriesNames.push(data.body[i].name);
+        this.countries.push(data.body[i]);
+      }
+    });
+  }
+};
+</script>
+
+<style>
+@import "./assets/style.css";
+@import 'https://unpkg.com/leaflet@1.5.1/dist/leaflet.css';
+</style>

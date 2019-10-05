@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font: 16px sans-serif;
+}
+.container {
+    height: auto;
+    padding: 50px;
+    background: #536DFE;
+    margin: 0 auto;
+    
+}
+header {
+    width: all;
+    padding: 50px 0;
+
+    text-align: center;
+}
+header h2 {
+    color: #fff;
+    font-weight: lighter;
+}
+header select {
+    padding: 5px 10px;
+    width: 60%;
+    margin-top: 10px;
+}
+
+section {
+    padding: 60px 0;
+    border-radius: 10px;
+    background-color:rgb(255, 255, 255, .4);
+    box-shadow: 0 10px 40px #333;
+}
+/******************/
+.boxs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.boxs div {
+    margin: 5px;
+}
+.boxs .details {
+    width: 30%;
+    height: auto;
+    background: #333;
+}
+.boxs .details h3 {
+    color: #fff;
+    background: #536DFE;
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+}
+.boxs .details p {
+    padding: 5px 10px;
+    color: #fff;
+    line-height: 2em;
+    border-bottom: 1px solid rgba(0, 0 ,255, .1);
+}
+.boxs .details p span {
+    color:#CDDC39;
+}
+.boxs .call-code {
+    width: 25%;
+    height: 200px;
+    background: #333;
+}
+.boxs .call-code h2 {
+    width: 100%;
+    height: 50px;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    background: #536DFE;
+}
+.boxs .call-code h1 {
+    font-weight: 100;
+    text-align: center;
+    padding: 10px;
+    padding-top: 25px;
+    font-size: 80px;
+    color: #fff;
+}
+.boxs .flag {
+    width: 340px;
+    height: 200px;
+    background: #536DFE;
+    padding: 5px;
+}
+.boxs .flag img {
+    width: 100%;
+    height: 100%;
+    background: rgb(165, 198, 211);
+}
+.boxs .weather {
+    width: 40%;
+    height: 300px;
+    padding-bottom: 10px;
+    background: #fff;
+}
+.boxs .weather p {
+    line-height: 1.5em;
+    margin:0 10px 0 5px;
+    padding: 5px 0 0 10px;
+}
+.boxs .weather span {
+    color: #43A047;
+}
+.boxs .weather h2 {
+    width: 100%;
+    height: 50px;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    background: #536DFE;
+}
+.boxs .weather img {
+    display: block;
+    width: 100px;
+    margin: 0 auto;
+}
+.boxs #map {
+    width: 40%;
+    height: 400px
+}

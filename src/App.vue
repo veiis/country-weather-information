@@ -1,16 +1,16 @@
 <template>
   <div id="app">
     <div class="container">
-      <header>
-        <h2>SELECT A COUNTRY</h2>
-        <select name="country" id="reg_select" v-model="selectedCountry" @change="getWeatherData">
-          <option v-for="country in countriesNames" :value="country">{{ country }}</option>
-        </select>
-      </header>
-      <section>
-        <div class="boxs">
-          <div class="details" id="details">
-            <h3>Country Name: {{ currentCountry.name }}</h3>
+      <section class="col-row">
+        <div class="search justify-content-md-center">
+          <h2>SELECT A COUNTRY</h2>
+          <select name="country" id="reg_select" v-model="selectedCountry" @change="getWeatherData">
+            <option v-for="country in countriesNames" :value="country">{{ country }}</option>
+          </select>
+        </div>
+        <div class="boxs row justify-content-md-center">
+          <div class="details col-lg-4 col-md-12" id="details">
+            <h3>{{ currentCountry.name }}</h3>
             <p>
               Native Name:
               <span>{{ currentCountry.nativeName }}</span>
@@ -38,37 +38,42 @@
               <span v-for="zone in currentCountry.timezones">{{ zone }}</span>
             </p>
           </div>
-          <div class="call-code">
+          <div class="call-code col-lg-4 col-md-12">
             <h2>CALLING CODE</h2>
             <h1 v-for="callCode in currentCountry.callingCodes">{{ callCode }}</h1>
           </div>
-          <div class="flag">
+          <div class="flag col-lg-4 col-md-12">
             <img :src="currentCountry.flag" />
           </div>
-          <div class="weather">
-            <h2>CAPITAL WEATHER REPORT</h2>
-            <img v-if="checkObject(currentWeather)" :src="'http://openweathermap.org/img/w/'+currentWeather.weather[0].icon+'.png'" />
-            <p>
-              Wind Speed:
-              <span v-if="checkObject(currentWeather)">{{ currentWeather.wind.speed }}</span>ms
-            </p>
-            <p>
-              Temprerature:
-              <span v-if="checkObject(currentWeather)">{{ currentWeather.main.temp }}</span>c
-            </p>
-            <p>
-              Humidity:
-              <span v-if="checkObject(currentWeather)">{{ currentWeather.main.humidity }}</span>%
-            </p>
-            <p>
-              Visibility:
-              <span v-if="checkObject(currentWeather)">{{ currentWeather.visibility }}</span>m
-            </p>
-          </div>
-          <div id="map" v-if="checkObject(currentWeather)">
-            <l-map style="height: 100%;" :zoom="map.zoom" :center="map.center">
-              <l-tile-layer :url="map.url" :attribution="map.attribution"></l-tile-layer>
-            </l-map>
+          <div class="container row justify-content-md-center">
+            <div class="weather col-lg-6 col-md-12">
+              <h2>CAPITAL WEATHER REPORT</h2>
+              <img
+                v-if="checkObject(currentWeather)"
+                :src="'http://openweathermap.org/img/w/'+currentWeather.weather[0].icon+'.png'"
+              />
+              <p>
+                Wind Speed:
+                <span v-if="checkObject(currentWeather)">{{ currentWeather.wind.speed }}</span>ms
+              </p>
+              <p>
+                Temprerature:
+                <span v-if="checkObject(currentWeather)">{{ currentWeather.main.temp }}</span>c
+              </p>
+              <p>
+                Humidity:
+                <span v-if="checkObject(currentWeather)">{{ currentWeather.main.humidity }}</span>%
+              </p>
+              <p>
+                Visibility:
+                <span v-if="checkObject(currentWeather)">{{ currentWeather.visibility }}</span>m
+              </p>
+            </div>
+            <div id="map" v-if="checkObject(currentWeather)" class="col-lg-6 col-md-12">
+              <l-map style="height: 100%;" :zoom="map.zoom" :center="map.center">
+                <l-tile-layer :url="map.url" :attribution="map.attribution"></l-tile-layer>
+              </l-map>
+            </div>
           </div>
         </div>
       </section>
@@ -133,8 +138,6 @@ export default {
           this.currentWeather = data.body;
           this.map.center = L.latLng(data.body.coord.lat, data.body.coord.lon);
         });
-
-        
     }
   },
 
@@ -152,5 +155,6 @@ export default {
 
 <style>
 @import "./assets/style.css";
-@import 'https://unpkg.com/leaflet@1.5.1/dist/leaflet.css';
+@import "https://unpkg.com/leaflet@1.5.1/dist/leaflet.css";
+@import "./assets/bootstrap.min.css";
 </style>

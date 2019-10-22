@@ -12,6 +12,13 @@ body {
     background: #e7e7e7;
     font: 14px 'Roboto';
 }
+h1 {
+    text-align: center;
+    font-size: 100px;
+    font-weight: 100;
+    margin: 30px 0 0 0;
+    color: #424242;
+}
 .container {
     margin: 0 auto;
     display: flex;
@@ -20,131 +27,146 @@ body {
 }
 .search {
     text-align: center;
-    margin: 20px auto;
+    margin: 0 0 10px;
     background: #333;
-    width: 90%;
+    width: 100%;
     padding: 30px;
 }
 .search h2 {
     color: #fff;
 }
 .search select{
-    width: 100%;
+    width: 40%;
     text-align: center;
     height: 40px;
     margin: 10px auto;
     padding: 10px;
 }
+.search select option {
+    padding: 5px 0;
+}
 .boxs {
-    width: 100%;
     display: flex;
-    flex-wrap: wrap; 
-    justify-content: center;   
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
 }
-.boxs div {
-    margin: 5px;
+.tb {
+    width: 100% !important;
 }
-.shodow {
-    box-shadow: gray 2px 2px 5px;
-}
-.country-detail {
-    width: 30%;
+.card-container {
+    width: 33% !important;
     height: auto;
-    background: #333;
-} 
-.country-detail h2, .call-code h2 ,.weather h2{
-    color: aliceblue;
-    display: block;
-    background: black;
     padding: 10px;
-    text-align: center;
 }
-
-.country-detail p , .weather p{
-    margin: 10px;
-    line-height: 2em;
-    color: orange;
-}
-.country-detail p span {
-    color: #fff;
-}
-.call-code {
-    width: 30%;
-    height: auto;
-    background: orange;
-}
-.call-code h1 {
-    text-align: center;
-    font-size: 120pt;
-    margin: 20px 0;
-    font-weight: 100;
-}
-.flag {
-    width: 30%;
-    padding: 10px;
-    height: auto;
-    background: rgb(143, 119, 119);
-}
-.flag img {
+.card {
     width: 100%;
-}
-.weather {
-    width: 45.3%;
-    height: auto;
+    height: 100%;
     background: #fff;
+    box-shadow: #929292 0 0 13px -1px;
+    transition: box-shadow .3s;
 }
-.weather p {
-   color: #333;
+.card-container-map {
+    width: 66%;
+    height: auto;
+    padding: 10px;
 }
-
-.weather p span {
-   color: orange;
+.card-container-weather {
+    width: 33%;
+    height: auto;
+    padding: 10px;
 }
-.weather .weather_status {
+.card p {
+    color: #424242;
+}
+.card p img {
+    width: 3%;
+}
+.bg-gray {
+    background: #424242 !important;
+}
+.txt-grey {
+    color: #424242 !important;
+}
+.txt-gold {
+    color: goldenrod !important;
+} 
+.pr {
+    margin: 10px 5px 5px 15px;
+    padding-bottom: 10px;
+}
+.line-h {
+    line-height: 3em;
+}
+.flag-img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 3px;
     display: block;
     margin: 0 auto;
-    width: 20%;
 }
-.weather p img {
-    width: 2.5%;
+.card h2 {
+    color: orange;
+    text-align: center;
+}
+.card p {
+    line-height: 2em;
+    color: #fff;
+}
+.card p span {
+    color: gold;
+}
+.hs {
+    background: #333 !important;
+    padding: 20px !important;
+}
+.h-color {
+    color: #424242 !important;
+}
+.img-pad {
+    padding: 15px;
+}
+.weather-status {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    width: 30%;
 }
 #map {
-    width: 45.3%;
-    height: auto;
+    height: 100%;
+    background: red;
 }
 
 @media only screen and (max-width: 900px) {
-    .country-detail {
-        width: 45% !important;
+    .card-container {
+        width: 50% !important;
     }
-    .call-code {
-        width: 45% !important;
+     .card-container:nth-child(3) {
+        width: 100% !important;
     }
-    .flag {
-        width: 91.5% !important;
+    .flag-img {
+        width: 100% !important;
+        height: 100% !important;
     }
 }
 
 @media only screen and (max-width: 760px) {
-    .country-detail {
-        width: 90% !important;
+    .card-container {
+        width: 100% !important;
     }
-    .call-code {
-        width: 90% !important;
+     .card-container:nth-child(3) {
+        width: 100% !important;
     }
-    .flag {
-        width: 90% !important;
-    }
-    #map{
-        width: 90% !important;
-        height: 250px !important;
+    .card-container-weather {
+        width: 100% !important;
 
     }
-    .weather {
-        width: 90% !important;
-    }
-    .boxs div {
-        margin: 5px 0 !important;
-    }
+    .card-container-weather {
+        width: 100% !important;
 
+    }
+    .card-container-map {
+        width: 100% !important;
+        height: 200px
+    }
 }

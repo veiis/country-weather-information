@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+    <vue-headful
+            title="Title from vue-headful"
+            description="Description from vue-headful"
+    />
+    
     <div class="container">
       <!-- Start of Search -->
       <div class="search">
@@ -117,13 +122,15 @@
 <script>
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 import L from "leaflet";
+import vueHeadful from 'vue-headful';
 
 export default {
   name: "app",
   components: {
     LMap,
     LTileLayer,
-    LMarker
+    LMarker,
+    vueHeadful
   },
   data: function() {
     return {
@@ -182,6 +189,7 @@ export default {
       }
       console.log(this.countries)
       this.currentCountry = this.countries[107];
+      console.log(this.countries)
       this.selectedCountry = this.currentCountry.name;
     });
 
